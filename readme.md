@@ -99,6 +99,8 @@ Although this ISO says Windows 7 Professional, it is a multi-edition and multi-l
 
 \*\* The Windows 7 Professional index of the install.wim was slipstreamed to include USB 3.0 drivers and NVMe drivers giving support for 6th Generation Intel (Skylake) Processors. Internet Explorer 11 was slipstreamed alongside a large number of security updates. 
 
+Minor changes can be made using a text editor to switch edition, OEM or channel once the Bootable USB has been created.
+
 ## Creating a Bootable USB with Rufus
 
 The last version of Rufus to support Windows 7 is version 3.22. Rufus can be downloaded from the official website [Rufus](https://rufus.ie/downloads/). Launch Rufus:
@@ -145,9 +147,12 @@ When finished, Rufus will say Ready, select Close:
 
 <img src='./images/img_020.png' alt='img_020' width='400'/>
 
-## Selecting Edition and OEM
+## Selecting Windows 7 Edition or OEM
 
 The default edition is Windows 7 Professional and Dell OEM SLP is applied by default. Skip this step if these defaults match your system.
+
+<details>
+<summary>Changing Edition or OEM</summary>
 
 Examine the Bootable USB in Windows Explorer. Navigate to the `sources` folder:
 
@@ -157,9 +162,11 @@ Select the ei.cfg file and open it in notepad:
 
 <img src='./images/img_022.png' alt='img_022' width='600'/>
 
-Change professional to the desired edition:
+For an OEM license change professional to the desired edition:
 
 <img src='./images/img_023.png' alt='img_023' width='600'/>
+
+For a Retail license, delete the `ei.cfg` file.
 
 <details>
 <summary>Windows 7 Starter</summary>
@@ -231,9 +238,11 @@ OEM
 
 </details>
 
-Navigate to the `sources\$OEM$\$$\setup\scripts` folder:
+Navigate to the `sources` folder:
 
 <img src='./images/img_024.png' alt='img_024' width='600'/>
+
+To change from an OEM channel to Retail channel, delete the `$OEM$` folder. To change edition or OEM navigate to `sources\$OEM$\$$\setup\scripts`:
 
 <img src='./images/img_025.png' alt='img_025' width='600'/>
 
@@ -389,6 +398,8 @@ Open this file in notepad and delete all the contents between the unattend xml h
 ```
 
 <img src='./images/img_035.png' alt='img_035' width='600'/>
+
+</details>
 
 ## Windows 7 Security Patches + .Net Framework
 
@@ -650,941 +661,169 @@ Insert the Bootable USB. Power up the Dell and press `F12`:
 
 <img src='./images/img_077.png' alt='img_077' width='600'/>
 
+Select the Bootable USB under the UEFI Boot option (unless Windows 7 32 Bit):
 
+<img src='./images/img_078.png' alt='img_078' width='600'/>
 
+The Windows Setup will load files:
 
+<img src='./images/img_079.png' alt='img_079' width='600'/>
 
+The Starting Windows logo will display:
 
+<img src='./images/img_080.png' alt='img_080' width='600'/>
 
+Select your Language:
 
+<img src='./images/img_081.png' alt='img_081' width='600'/>
 
+Select your regional settings:
 
-
-
-
-## Updating the UEFI BIOS from USB
-
-On a Dell system press `F12` when powering to enter the Boot Menu. Other OEMs may use different usually function key combinations and have slightly different BIOS General User Interfaces. Look for the term "Boot Mode" or "UEFI". If these terms are not present on the Boot Menu you have a Legacy only BIOS.
-
-
-Next look for the Secure Boot status (a handful of early UEFI systems don't have Secure Boot) such as the OptiPlex 790 boot menu below. These system will use a UEFI Boot that always enables Legacy ROMs:
-
-
-In the UEFI Boot Menu above some systems will allow you to select Change Boot Mode Settings to UEFI without Secure Boot or Legacy Directly:
-
-
-Windows 7 does not support Secure Boot and it must be OFF in order to Boot to Windows 7 installation media. A UEFI Boot (when available) should be used for Windows 7 64 Bit but a Legacy Boot must be used for Windows 7 32 Bit.
-
-
-Use this setting for Windows 7 64 Bit.
-When using Rufus to make a Bootable USB use the GPT Partition Scheme.
-
-Use this setting for Windows 7 32 Bit.
-When using Rufus to make a Bootable USB use the MBR Partition Scheme.
-In other systems you may need to enter the UEFI BIOS setup to amend the settings.
-
-
-The BIOS setup can also be accessed directly using [F2] when powering up the Dell system:
-
-
-Windows 7 64 Bit does not support Secure Boot, it must be Disabled in the UEFI BIOS setup for Windows 7 64 Bit Installation. Look for a tab called Secure Boot, expand it, select Secure Boot Enable and change the setting to Disabled. Select OK at any warning dialog box:
-
-
- You should leave Enable Attempt Legacy Boot unchecked:
-
-
-Next go to Boot Sequence and ensure the Boot List Option is set to UEFI:
-
-
-Select Apply:
-
-
-Press OK:
-
-
-It is also worth looking at your Drives here – in my case I have one 128 GB SSD drive that is M.2, others may have a HDD and a low capacity 32-64 GB SSD Cache Drive:
-
-
-For a single Drive use AHCI. If you have a small capacity SSD and a large HDD you would need to select RAID On (sometimes called Intel Smart Response Technology):
-
-
-Now exit the UEFI BIOS setup to save the changes:
-
-
-Lenovo UEFI BIOS
-For a Lenovo we will use a Lenovo P320 ThinkStation with a 6th Generation Intel Skylake Processor as an example. When powering up the system press [F12] to get to the UEFI Boot Menu:
-
-
-There is no mention about Secure Boot so we will have to Enter the Setup to check, the setup can be accessed directly by powering up and pressing [F1]:
-
-
-The setup may also tell you if a SLIC Version of 2.1 (OA2.1 Marker) is present.
-Select the Security tab and then highlight Secure Boot:
-
-
-Ensure that Secure Boot is Disabled for a Windows 7 install:
-
-
-To change the Boot options go to the Startup tab:
-
-
-For Windows 7 installation you will need to enable CSM (this is what Dell call Legacy Roms):
-
-
-A UEFI Boot (when available) should be used for Windows 7 64 Bit but a Legacy Boot must be used for Windows 7 32 Bit.
-
-
-Use this setting for Windows 7 64 Bit.
-When using Rufus to make a Bootable USB use the GPT Partition Scheme.
-
-Use this setting for Windows 7 32 Bit.
-When using Rufus to make a Bootable USB use the MBR Partition Scheme.
-HP UEFI BIOS
-When powering up press [F9] to get the Boot Menu and [F10] to get to the UEFI BIOS setup. On some older systems you need to power up pressing [Esc] to get to a startup menu which you can use to access the BIOS setup or Boot Menu respectively.
-
-Downloading Installation Media
-The Dell Windows 7 Multi-Lingual Reinstallation DVD
-Many Dell systems came with a Dell Windows 7 Reinstallation DVD like below which can used to clean install Windows 7 and will automatically apply Dell Original Equipment Manufacturer (OEM) System Locked Preinstallation (SLP) offline on an eligible Dell system.
-
-These DVDs are out of date however and may not have the necessary drivers to install Windows 7 on your system (missing USB 3.0 and Storage Controller Drivers in particular).
-
-
-Dell Windows 7 Reinstallation DVD stating the Edition, Service Pack and Architecture.
-For best performance slipstream updates and drivers to the install.wim. If you have the DVD. Create a new folder on your Desktop and call it Win7. Then copy its contents to a folder and perform the slipstream from it. You do not need to Download the Dell Windows 7 Pro Skylake ISO.
-
-The Dell Windows 7 Pro Skylake Reinstallation Multi-Lingual ISO
-An updated ISO was made available to download by Dell in January 2016 which incorporates driver support for up to 6th Generation Intel Hardware for the Professional Edition and Automatically Applies OEM System Locked Preinstallation. Dell only offer an updated Professional Edition (as they could only sell systems with OEM Downgrade Rights to Professional at the time they released the ISO). However this downloadable ISO can be converted into other Editions by modification of two files in a text editor such as Notepad++ (these other Editions are not updated however). Dell OEM SLP can be removed converting the installation media into Retail installation media. The Dell ISO is also multi-lingual:
-
-
-It can be downloaded officially using the Dell OS Recovery Tool or unofficially via the Windows ISO Download Tool (which addresses a lot of limitations of the Dell OS Recovery Tool and you'll need to use these workarounds if you are wanting to install Windows 7 on a non-Dell system). This guide will instruct in converting the Dell Windows 7 Pro ISO to any other Edition and for use with any other OEM.
-
-The Dell OS Recovery Tool
-Downloading and Installing the OS Recovery Tool
-The Dell OS Recovery Tool requires Microsoft.net Framework 4.7.2 to be installed and requires a Dell Service Tag for selection of the image (if you do not have a valid Dell Service Tag use the Windows ISO Download Tool which overrides the query for a Service Tag giving you a Download Link direct from the Dell Server instead). This is inbuilt into Windows 10. For Windows 7 it is likely already installed however if you require it, it is available here:
-
-Microsoft .Net 4.7.2
-Dell OS Recovery Tool
-
-Double click the Program:
-
-
-Accept the User Account Control:
-
-
-Select Install:
-
-
-Select Close. You will have a Dell OS Recovery Tool icon on your Desktop and Start Menu:
-
-
-Launch the Dell OS Recovery Tool:
-
-
-Accept the User Account Control:
-
-
-You will see the Dell logo:
-
-
-Select Get Started:
-
+<img src='./images/img_082.png' alt='img_082' width='600'/>
 
 Select Next:
 
+<img src='./images/img_083.png' alt='img_083' width='600'/>
 
-Here if you are running on a Dell Computer, you can select "This Computer" and it will scan your system for its Service Tag:
+Select Install Now:
 
+<img src='./images/img_084.png' alt='img_084' width='600'/>
 
+The setup will start and the edition and product key will be input from the installation media:
 
-It detects this is an OptiPlex 7040. Select Next:
+<img src='./images/img_085.png' alt='img_085' width='600'/>
 
+Accept the License Agreement and select Next:
 
-In my case my OptiPlex 7040 shows a Windows 10 Pro License. This system is also eligible for OEM Downgrade Rights and has a 6th Generation Intel Processor so a Dell Windows 7 Professional OEM Reinstallation ISO will also work on it. I will select Change Device:
+<img src='./images/img_086.png' alt='img_086' width='600'/>
 
+## Drive Options
 
-I will then select a Service Tag which has a Windows 7 Pro OEM Reinstallation ISO available for Download. Inputting by Service Tag allows you to run this tool on a non-Dell Computer:
+Select Custom Install:
 
+<img src='./images/img_087.png' alt='img_087' width='600'/>
 
-Inputting the 7 digit Service Tag:
+If the system has been wiped the internal drives looks as follows:
 
+<img src='./images/img_088.png' alt='img_088' width='600'/>
 
-Selecting Next:
+If an old installation is present, old partitions may be present and need to be removed:
 
+<details>
+<summary>Removing Partitions from an old installation</summary>
 
-If your Service Tag doesn't work use the Windows ISO Download Tool instead.
+Select Drive Options (Advanced):
 
-I can see the Windows 7 SP1 Professional 64 Bit ISO available to Download.
+<img src='./images/img_089.png' alt='img_089' width='600'/>
 
+Select each partition in turn and select Delete:
 
-Select Download:
+<img src='./images/img_090.png' alt='img_090' width='600'/>
 
+Select OK at the prompt:
 
+<img src='./images/img_091.png' alt='img_091' width='600'/>
 
-Saving the Installation ISO
-By default the Dell OS Recovery Tool deletes the downloaded ISO after ti creates a Bootable USB.
+Select the next partition and select delete:
 
-IF YOU WANT THE ISO DO NOT SELECT NEXT
-
-
-Open up Windows Explorer. Select C:\
-
-
-The folder the ISO is save in is a subfolder of ProgramData, a hidden folder.
-
-
-Change the Address to
-
-C:\ProgramData
-
-Select Dell
-
-
-Select OS Recovery Tool
-
-
-Select Downloads:
-
-
-When you select this, you will told you need to elevate permissions to access the folder. Select Continue:
-
-
-You should now see the ISO. Select Copy:
-
-
-Paste it somewhere like the Desktop:
-
-
-
-You now have the Dell Windows 7 Professional Skylake Reinstallation ISO:
-
-
-You can close the Dell OS Recovery Tool.
-
-The Windows ISO Download Tool
-The Dell OS Recovery Tool asks for a Service Tag in order to initiate the download. Sometimes the Dell OS Recovery Tool doesn't show the correct Architecture of Windows 7 (e.g. 32 Bit instead of 64 Bit) or only shows Windows 10 instead of Windows 7. There is another tool called the Windows ISO Download Tool which can be used to get direct links from the Dell Server. It can also get Windows 7 (August 2018 English Only) ISOs from Microsoft and Windows 7 (November 2010 All Languages) from Microsoft however there are some issues with the November 2010 Download Links from time to time and there are issues when using the August 2018 ISOs to slipstream updates so I recommend using the multi-lingual Dell ISO for all systems and converting it if needed to Retail or for use with another OEM.
-
-Windows ISO Download Tool
-Rufus
-Select Dell to the right hand side (not Windows 7). Then select Windows 7 Professional 64 Bit or 32 Bit to the left hand side. You will then need to select a model (it doesn't matter what model you select as there is no model to model customisation of the ISO, the ISO is always the same). Then select Download.
-
-
-Rufus can be used to check the SHA256 Hash. Launch Rufus:
-
-
-Accept the User Account Control:
-
-
-Select, select:
-
-
-Select the ISO and select Open:
-
-
-Select ISO Checksums:
-
-
-The SHA256 should be displayed:
-
-
-The SHA256 should match that stated by the Windows ISO Download Tool:
-
-
-Creating January 2020 Media Refresh Installation Media using NTLite
-Preparing Folders
-The Windows 7 Installation Media is from January 2016 and by default locked to Windows 7 Pro. However the other editions can be unlocked but are last updated in November 2010. The other Editions lack the USB 3.0 Drivers and Storage Controllers however we will incorporate these.
-
-Win7 Folder
-ISOs can be mounted directly in Windows 10 by right clicking them and selecting Mount.
-
-
-To do this in Windows 7 you will need to install Virtual Clone Drive.
-
-Virtual Clone Drive
-
-Create a new folder on your Desktop called Win7 and copy all the contents from the ISO to it:
-
-
-Boot Drivers Folder
-Next download the following and launch the setup to extract them to folders USB3 and SATA respectively. Copy all the files from the 64 Bit or 32 Bit driver subfolders (depending on the architecture of your original Reinstallation DVD) into a new folder bootdrivers. You should have the following for 64 Bit Windows (it will look similar for 32 Bit):
-
-F6 SATA Drivers
-USB 3.0 Drivers
-
-Updates Folder
-Extract the Gigabyte Windows USB Tool and get the KB2990941 and KB3087873 hotfixes subfolder that matches your architecture. These should be added to the Updates folder alongside all other Updates. The updates needed for 64 Bit are listed below (it will look similar for 32 Bit):
-
-
-Windows 7 64 Bit Standalone Updates
-Only the NVMe hotfixes found within the Gigabyte Windows USB Tool are available to download. Microsoft have pulled the remaining standalone downloads.
-
-KB3020369
-KB3125574
-KB2729094
-KB2670838
-KB2834140
-KB2639308
-IE11
-KB4474419
-KB4490628
-KB4536952
-KB4534310
-Gigabyte Windows USB Tool
-Windows 7 32 Bit Standalone Updates
-KB3020369
-KB3125574
-KB2729094
-KB2670838
-KB2834140
-KB2639308
-IE11
-KB4474419
-KB4490628
-KB4536952
-KB4534310
-Gigabyte Windows USB Tool
-Only the NVMe hotfixes found within the Gigabyte Windows USB Tool are available to download. Microsoft have pulled the remaining standalone downloads.
-
-Dell, Lenovo or HP (Business Model) Driver Pack
-Download the Driver Pack file for your model:
-
-Dell
-Lenovo
-HP
-Note: Home Models such as the Inspiron Range may not have a Driver Package.
-
-
-The Dell Driver Pack is packaged as a CAB you will need to extract it with 7zip. For the Lenovo or HP Driver Pack, launch the exe and select the folder to extract the drivers to.
-
-7zip
-
-Open the extracted folder and then select the 64 Bit or 32 Bit Drivers depending on your architecture.
-
-
-Go to the extracted folder, select the model subfolder, then the win7 subfolder and then select either the x64 (64 Bit) or x86 (32 Bit) subfolder that matches the architecture of your Windows 7 ISO respectively. Rename the x64 folder installdrivers:
-
-
-Download
-
-Microsoft .Net Framework 4.7.2
-You should have the following folders:
-
-
-Converting a Dell Windows 7 Professional Reinstallation USB to another Edition
-Skip this section if you are sticking to a Dell system with Windows 7 Professional.
-
-Switching to another Dell OEM Edition
-To change Edition of the Windows 7 Pro Bootable USB we only need to change two files.
-
-I advise installing Notepad++ to modify the two files
-
-Notepad ++
-The first file needing to be changed is the EI.cfg file it is found in:
-
-Win7\sources
-This image has an empty alt attribute; its file name is 2-9.png
-Right click this and Edit it with Notepad++
-
-This image has an empty alt attribute; its file name is 3-7.png
-You are only wanting to change one line, this word professional to the desired edition starter, homebasic, homepremium, professional and ultimate. What you type should all be lower case with no spacing:
-
-This image has an empty alt attribute; its file name is eiprofessional.png
-I will demonstrate with Home Premium using homepremium but you can slide across for the other editions.
-
-Professional
-Home Premium
-Ultimate
-Home Basic
-Starter
-Professional
-Home Premium
-
-Home Premium
-The second file we need to modify is the SLP.cmd file found in:
-
-Win7\sources\$$\$OEM\setup\scripts 
-Once again right click it and select Edit with Notepad++
-
-This image has an empty alt attribute; its file name is 4-6.png
-This file contains two lines, the first installs the OEM certificate (which is the same for all Editions) and the second installs the Generic OEM SLP key.
-
-This image has an empty alt attribute; its file name is slpprofessional.png
-We only need to change this generic OEM SLP key to match the generic OEM SLP key of the Edition of Windows 7 we wish to install. Once again I will demonstrate using Home Premium but you can slide across for other editions:
-
-Professional
-Home Premium
-Ultimate
-Home Basic
-Starter
-Professional
-Home Premium
-
-Home Premium
-Starter:
-36T88-RT7C6-R38TQ-RV8M9-WWTCY
-Home Basic:
-36Q3Y-BBT84-MGJ3H-FT7VD-FG72J
-Home Premium:
-6RBBT-F8VPQ-QCPVQ-KHRB8-RMV82
-Professional:
-32KD2-K9CTF-M3DJT-4J3WC-733WD
-Ultimate:
-342DG-6YJR8-X92GV-V7DCV-P4K27
-That's all the Windows 7 Installation Media will now install Windows 7 Home Premium or the Edition you select Opposed to Windows 7 Professional.
-
-You will not be asked what Edition to select during installation and instead be taken straight to the Home Premium License screen:
-
-This image has an empty alt attribute; its file name is vlcsnap-2019-03-22-12h10m03s656.png
-You will not be asked for a Product Key during installation:
-
-This image has an empty alt attribute; its file name is vlcsnap-2019-03-22-12h10m23s611.png
-This image has an empty alt attribute; its file name is vlcsnap-2019-03-22-12h10m46s423.png
-Dell OEM SLP will occur on eligible Dell systems.
-
-Switching to a Non-Dell OEM Edition or Retail Edition
-The OEM Cert File included within the Windows 7 Installation Media is only applicable to Dell. The cert file works with all Editions of Dell Windows 7 on Dell systems but not for other OEMs.
-
-To remove Dell customisation from the Dell Windows 7 Professional Skylake Reinstallation ISO delete the $OEM$ folder and EI.cfg file from the sources folder.
-
-
-
-The installation media will then act as Retail Installation Media.
-
-To activate with OEM SLP you will need to skip the Product Key during installation and then use a script to manually install the OEM cert and change the product key to the appropriate OEM SLP key.
-
-I have put together a collection below. Select your Computer Manufacturer and Windows 7 edition and copy the OEM folder to the Win7 folder on your Desktop.
-
-OEM Cert Collection
-This will result it begin added to your updated Windows 7 installation media, but OEM SLP won't be automatically applied like in the Dell case. The OEM folder will have to be manually copied to the C:\ Drive and the script file ran as an administrator to apply the OEM SLP (more details are given in the product activation section).
-
-Using NTLite
-Install NTLite. Download and install NTLite (we will use the free version):
-
-NTLite
-Update the Boot.wim
-Launch NTLite. To the top select Add → Image Directory:
-
-
-Select your Win7 folder:
-
-
-Next select Index 2 of the boot.wim:
-
-
-When it is ready it will show up as green.
-
-
-Select Drivers to the left hand side:
-
-
-Select Add → Directory Containing Drivers:
-
-
-Select the bootdrivers folder:
-
-
-If starting from the Dell Skylake Reinstallation ISO one of the driver will already be present. Select OK:
-
-
-
-Now go to Apply:
-
-
-Select Process:
-
-
-Then select Yes:
-
-
-
-Close down and relaunch NTLite.
-
-Updating the Install.wim
-Now select the index you want to update. In this case I will select Windows 7 Professional:
-
-
-
-Select Updates to the left hand side:
-
-
-Select Add → Directory containing packages:
-
-
-If you are paid version you can instead use Latest Online Updates (which will download and slipstream the updates from Windows Update).
-
-Select the Updates folder:
-
-
-If using the Dell Windows 7 Professional Skylake ISO and you have Windows 7 Pro selected some will already be present, select OK:
-
-
-
-To the left hand side, select Drivers:
-
-
-Select Add → Directory Containing Drivers:
-
-
-Select your installdrivers folder (note if you do not have a driver pack, use the bootdrivers again to enable basic generic driver support):
-
-
-Select OK at the warning:
-
-
-
-Select Post-Setup:
-
-
-Drag and drop the Microsoft .Net Framework 4.7.2 and type
-
-/q
-Note in the video and the screenshot below I had the wrong value do not use /u otherwise you will have to go through the setup of the Microsoft .Net Framework. The \q will perform a quiet install, it'll install in the background automatically at the screen which says Windows is finalizing your settings.
-
-In the parameters box:
-
-
-
-Select Apply:
-
-
-Check the Create ISO button:
-
-
-Name the ISO and select Save:
-
-
-Label the ISO and select OK
-
-
-Creating the Media Refresh January 2020 ISO
-When ready select Process:
-
-
-Select Yes:
-
-
-When done you can close NTLite.
-
-
-You should have your updated ISO now.
-
-
-Creating a Bootable USB using Rufus
-Rufus can be used to create a Bootable USB from the Media Refresh January 2016 ISO.
-
-Rufus
-Double click Rufus:
-
-
-Accept the User Account Control Prompt:
-
-
-Insert a 16 GB USB Flash Drive:
-
-
-Select, select:
-
-
-Select your new Windows 7 January 2020 Media Refresh ISO:
-
-
-It'll display at the bottom and also populate the volume label:
-
-
-Since the install.wim exceeds 4 GB it will alway have a NTFS file system. If you are installing 64 Bit Windows 7 on a system with a UEFI BIOS select GPT as the Partition scheme otherwise select MBR for an older system with a Legacy Only BIOS or for 32 Bit Windows 7:
-
-
-Select Start:
-
-
-Accept the warning to format the USB Flash Drive:
-
-
-When done Rufus will warn you that this Windows 7 Installation Media won't pass Secure Boot.
-
-
-You may now Close Rufus:
-
-
-A Clean Install of Windows 7
-Booting from a Bootable USB
-Power Down your Dell an Insert your Windows 7 Installation USB and make sure no other USB Devices are connected except for the Keyboard and Mouse. If using a Dell OptiPlex model (or other Desktop) I recommend using the back USB Ports as these are directly on the System Board and Avoiding the Front Ones for Windows 7 Installation.
-
-
-Hold [F12] while powering up your computer:
-
-
-You will now enter the UEFI BIOS Boot Menu:
-
-
-Notice that it says to the top that the Boot Mode is set to UEFI and Secure Boot is OFF. Press [↓] until you get to your USB Flash Drive (in my case it is a Sandisc Cruzer Glide 16 GB), ignore any listings sunder Legacy Boot.
-
-
-Some systems may tell you to press any key to continue Booting from USB, if they do press the space bar.
-
-Early Installation
-You will get a black screen that says "Windows is Loading Files."
-
-
-Then one that says Starting Windows.
-
-
-You will then be prompted for your language, time and currency format and keyboard settings, amend these as desired. If you use an English .iso it'll be set by default to English (US), I'm going to change to English (UK):
-
-
-Select Install Now.
-
-
-You will get a Setup is Starting Screen:
-
-
-You may get a file asking you what Edition of Windows you wish to install. This depends if the installation media has an EI.cfg file – the EIF.cfg file is a text file which automatically selects the option at this screen. In my case I am going to install Windows 7 Professional using Downgrade Rights from Windows 10 Pro OEM on a Dell OptiPlex 7040:
-
-
-Read the license, check to select and then select Next.
-
-
-Next select Custom (Advanced).
-
-
-Loading SATA Drivers and Deleting Partitions
-Warning: This step will result in data loss of internal drives.
-
-If the Windows 7 installation media can see your SSD/HDD/HSSD on the next screen then you do not need to load a SATA preinstallation driver as it's incorporated. This should be the case for the Dell Skylake Reinstallation .isos which have support for up to 6th generation Intel Skylake systems.
-
-Loading SATA Drivers
-The Dell Windows 7 Pro ISO used in this guide should have all the SATA Drivers included for up to 6th Generation Intel Hardware and be able to recognise your internal drives during the Windows Setup.
-
-If using older Windows 7 Installation Media it may not have the SATA drivers required for your Storage Controller and hence be unable to read your drive.
-
-
-If no drives are listed on the "Where do you want to install Windows?" screen then you must select Load Driver and select the SATA drivers from a USB stick. The SATA drivers essentially allow Windows to recognise the hard drive controller on the motherboard and thus allow Windows to view the drive letting you proceed with the install.
-
-Note the error message above is:
-
-No Drives were Found. Click Load Driver to Provide a Mass Storage Driver for Installation.
-
-Quite often other related error messages show such as:
-
-A media driver your computer needs is missing
-
-A required CD/DVD drive device driver is missing
-
-These normally mean your installation media is corrupt and are not because you need to load a driver. "A required CD/DVD drive device driver is missing" quite often shows on Desktops when the Front USB Ports are used, move your Bootable USB to the back USB Ports instead and restart the computer.
-
-Although it is recommended to slipstream all standalone updates and the complete Driver Cab File into the installation media as demonstrated with the slipstream scripts. It is also possible to manually load the SATA drivers:
-
-Get the SATA Drivers from:
-
-Dell
-
-Press [Ctrl] and [ f ] to do a search. I'm going to type in 7040 as I am going to clean install Windows 7 64 Bit on this model.
-
-
-You can scroll down until you get to Serial ATA:
-
-
-Alternatively press [Ctrl] and [ f ] and do a search for F6 (these were called F6 drivers as they used to be loaded in Windows XP by pressing F6 and using a Floppy Drive!)
-
-
-You must extract the driver as the Windows Setup cannot read .exes. Normally this can be done by launching the setup:
-
-
-Accept the User Account Control:
-
-
-Select Extract:
-
-
-Specify the location:
-
-
-Copy the extracted folder to your Windows 7 Bootable USB.
-
-Look through the contents of the extracted folder, there is normally a drivers subfolder and a Windows7-x64 subfolder:
-
-
-It's contents should look like:
-
-
-This is the format the Windows setup can read. Select Load Drivers:
-
-
-Then Browse:
-
-
-Then navigate to the subfolder containing the drivers:
-
-
-Ensure that "Hide drivers that are not compatible with hardware on this computer is ticked" (it should be set like this by default). Select Next:
-
-
-
-The Storage controller is now recognised so the internal HDDs/HSSDs etc all show up. If it is all unallocated space as shown select Next.
-
-
-If instead you have a previous version of Windows on your drives screen may instead look like this.
-
-
-Warning 2: This step will result in data loss of internal drives.
-
-You can perform a Low Level Format using the Windows Installation Media by Deleting all the partitions on the drive. You should do this if:
-
-You are clean installing the latest version of Windows 10 on your PC.
-You are sure your old version of Windows wasn't infected with malicious software.
-You are keeping your computer…
-You should instead quit Windows Installation and perform a Secure Wipe using:
-
-You are clean installing Windows 7 due to a malicious software.
-You have bought your computer second hand (and are not sure what the last user has had on the PC).
-You are planning selling your computer on (and don't want personal data passed on).
-Securely Wiping All Drives on your Dell System
-To perform the Low Level Format using the Windows Installation Media select every partition on Drive 0 (or the desired Drive you wish to install Windows if you have a system with a multiple drive configuration) and systematically delete any partition.
-
-Delete all Partitions including Recovery Partitions, these are for old obsolete versions of Windows and no longer required.
-
-
-If multiple drives show you may have a SSD and a HDD.
-
-If your SSD is >128 GB install Windows 7 on your SSD as it'll result in optimal performance.
-
-If it is 32-64 GB it should be a cache drive. Remove all partitions on it and on the HDD. Then install on the HDD. The SATA Operation needs to be in RAID. Notes on setting up Intel Rapid Storage Technology to use the SSD as a cache drive will be given later.
-
-Middle of Installation
-You will then a screen telling you the progress of the install and Windows will restart once:
-
-
-
-
-
-
-
-
-If you have slipstreamed the drivers pack,all the drivers will be installed at this stage and you should observe your screen resolution change:
-
-
-
-
-
-
-If you have securely wiped your system and are using Dell Windows 7 Installation Media with slipstreamed updates and system drivers using NTLite on a Dell System then this screen is more or less at the same state as an updated Dell Factory Image. You can power off your system if you plan to sell it on to a new end user (other OEMs won't be automatically activated so it won't quite be in a factory state).
-
-Type in your "username", by default the PC name will be "username-PC" but you can change this as desired.
-
-
-Next type in your password, retype it and leave yourself a hint.
-
-Alternatively just select next (to have no password – not recommended but optional). Personally for convenience I tend to leave the password blank and add one after the installation of Windows 7, drivers and updates as you will be prompted to restart your computer several times.
-
-
-The Product Key
-You should only input a Product Key at this stage if your License is Retail Full, otherwise select Skip for OEM Licenses and Retail Upgrade Licenses. Note this screen will not show at all if using Dell Windows 7 Reinstallation Media. Installation without a Product Key will give a 30 Day Trial (we only need about 30 mins of this trial before we go ahead and activate Windows).
-
-
-End of Installation
-You will then be asked about Windows Update settings its generally best to go with recommended.
-
-
-Then select your time and date settings.
-
-
-Note Windows 7 has reached End of Life and is likely to be insecure on the Internet.
-
-If you have slipstreamed the driver pack and are connected to an ethernet, the following screen should display and you can select the network type:
-
-
-If you have slipstreamed the driver pack and are not connected to an ethernet but have a wireless card you will be prompted to connect to a wireless network. Then see the screen above.
-
-
-If you have not slipstreamed the driver pack, the Windows 7 setup will be unable to connect to the internet and skip these screens.
-
-The setup will Finalise (it may take a moment to do this as it will silently install the Microsoft .Net Framework 4.7.2) taking you to the Windows Desktop.
-
-
-
-Microsoft Product Activation
-If you have used slipstreamed Dell Installation Media on a Dell System, your installation should already be activated, the standalone updates and all the system drivers will be installed.
-
-Right click the start button and select Properties:
-
-
-You will see your activation status.
-
-If you have used OEM Reinstallation Media on an OEM System e.g. the Dell Windows 7 Professional Reinstallation ISO or DVD on an eligible Dell System (or modified it for another Edition on a Dell), Windows 7 should be activated offline automatically using OEM System Locked Preinstallation.
-
-
-If you have used Retail Installation Media (or Dell OEM media with the $OEM$ folder removed) on a system that has a Windows 7 OEM License (or downgrade rights from Windows 8.x Pro or Windows 10 Pro OEM). Windows won't be activated and you will need to manually apply OEM System Locked Preinstallation. Note you will also not have the Dell customised wallpaper or Dell branding (logos):
-
-
-
-This activation mechanism is an offline activation mechanism so you don't need to risk connecting an end of life operating system to the internet to apply this activation mechanism.
-
-Close the System Properties Window after checking the activation status.
-
-If you followed the slipstream procedure above you should have added an OEM folder on the installation media.
-
-
-If not you can download it from the OEM SLP Collection (select your computer manufacturer and edition of Windows 7):
-
-OEM Cert Collection
-In this case I will carry Windows 7 Pro OEM SLP Activation on a Lenovo ThinkStation P320 (the UEFI BIOS setup shows it has the necessary SLIC 2.1 and is therefore eligible for OEM downgrade rights)
-
-Copy the OEM folder to the C:\Drive
-
-
-You should have two files an OEM xrm-ms cert and a SLP script file. Right click the slp script file and select Run as Administrator:
-
-
-Select Yes:
-
-
-The first line of code will install the xrm-ms cert file:
-
+<img src='./images/img_092.png' alt='img_092' width='600'/>
 
 Select OK:
 
-
-The next line will install the generic OEM SLP key (generic for your OEM and Edition):
-
+<img src='./images/img_093.png' alt='img_093' width='600'/>
 
 Select OK:
 
+<img src='./images/img_094.png' alt='img_094' width='600'/>
 
-Press any key to close the command prompt:
+Select the next partition and select delete:
 
+<img src='./images/img_095.png' alt='img_095' width='600'/>
 
-Windows should now be activated with a Product ID containing OEM-899 (indicating OEM SLP).
+Select OK:
 
+<img src='./images/img_096.png' alt='img_096' width='600'/>
 
-If it has not changed it may be because the System Properties Window was left open (in which case restart your computer and look at the activation status).
+</details>
 
-If it has not activated it may because your system is not eligible for OEM SLP activation and you can check for a SLIC using RWEverything portable as mentioned near the start of this guide.
+Select Disk 0 Unallocated Space and select Next: 
 
-If you have used Retail Installation Media with a Full Retail Product Key you should be able to change key in this screen and automatically activate when online.
+<img src='./images/img_097.png' alt='img_097' width='600'/>
 
+## Windows Setup
 
-If you have used Retail Installation Media with a Retail Upgrade Only Product Key then you may have activation issues after performing a clean installation. You should activate online by using the Command Prompt instead.
+The Windows Setup will copy files to the Boot Drive and expand the files:
 
-You may get this is you attempt to activate normally, to get around this, we can use the Command Prompt:
+<img src='./images/img_098.png' alt='img_098' width='600'/>
 
-key-issue
-Press the Start Button and in the search box type in CMD.
+Then prompt for a restart. At this stage remove the Bootable USB:
 
-Right click CMD.exe and select run as an administrator. This will open up the elevated command prompt accept any user account control prompt.
+<img src='./images/img_099.png' alt='img_099' width='600'/>
 
-1
-To input your product key type:
+The Windows Setup will continue from the internal drive once the computer restarts:
 
-slmgr /ipk xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
-Where xxxxx-xxxxx-xxxxx-xxxxx-xxxxx is your product key and then press [↵].
+<img src='./images/img_100.png' alt='img_100' width='600'/>
 
-2
-Select ok and then to activate type
+<img src='./images/img_101.png' alt='img_101' width='600'/>
 
-slmgr /ato
-This will activate your product.
+The Windows setup will restart again:
 
-3
-Install the Latest Security Updates
-If you have slipstreamed all the updates into the Windows 7 installation media using NTLite as outlined above skip this step as you already have all the standalone updates installed. Otherwise it is recommended to install the following standalone updates.
+<img src='./images/img_102.png' alt='img_102' width='600'/>
 
-You'll need to use another computer to download these and save them to USB as an unslipstreamed Windows 7 installation is unlikely to contain the system drivers for the network adaptors.
+<img src='./images/img_103.png' alt='img_103' width='600'/>
 
-Convenience Rollup
+<img src='./images/img_104.png' alt='img_104' width='600'/>
 
-Service Stack
-KB3020369-x64
-Convenience Rollup
-KB3125574-x64
-Service Stack
-KB3020369-x86
-Convenience Rollup
-KB3125574-x86
-A restart is required after installing these updates.
+## User Account Setup
 
-IE11 Prerequisite Updates
+Input your name and computer name:
 
-IE11 is already included in the Pro Edition of the Dell Skylake ISO (excluded on other Editions)
+<img src='./images/img_105.png' alt='img_105' width='600'/>
 
-KB2729090-x64
-KB2670838-x64
-KB2834141-x64
-KB2639308-x64
-KB2729094-x86
-KB2670838-x86
-KB2834140-x86
-KB2639308-x86
-A restart is required after installing these updates.
+Optionally input a password:
 
-IE11
+<img src='./images/img_106.png' alt='img_106' width='600'/>
 
-IE11 is already included in the Pro Edition of the Dell Skylake ISO (excluded on other Editions)
+The update options are redundant as Windows 7 has reached end of life:
 
-IE11-x64
-IE11-x86
-A restart is required after installing these updates.
+<img src='./images/img_107.png' alt='img_107' width='600'/>
 
-Service Stack Updates for January 2020 Rollup
+Select your time zone and select next:
 
-KB4474419-x64
-KB4490628-x64
-KB4536952-x64
-KB4474419-x86
-KB4490628-x86
-KB4536952-x86
-A restart is required after installing these updates.
+<img src='./images/img_108.png' alt='img_108' width='600'/>
 
-Security Rollup January 2020
+The setup will finish taking you to the Windows 7 Desktop:
 
-KB4534310-x64
-KB4534310-x86
-A restart is required after installing these updates. Windows 7 Reaches End of Life in January 2020 so this is likely to be the final Security Rollup.
+<img src='./images/img_109.png' alt='img_109' width='600'/>
 
-Microsoft .Net Framework
+## System Drivers
 
-Microsoft .Net 4.7.2
-Offline Installer
-Microsoft .Net 4.7.2
-Offline Installer
-A restart is required after installing this updates.
+System drivers and a generic display driver is used:
 
-System Drivers
-If you have slipstreamed a driver pack for your system into your Windows 7 installation media all drivers needed should be installed. Right click Computer and select properties:
+<img src='./images/img_110.png' alt='img_110' width='600'/>
 
+Install the OS Updates and then the system drivers in the order listed previously:
 
-Then select Device Manager:
+<img src='./images/img_111.png' alt='img_111' width='600'/>
 
+## Product Activation
 
-If you have slipstreamed your Driver Pack then all drivers should be installed and there should eb no warnings in the Device Manager:
+Left click the Start Button and Right Click Computer and select Properties:
 
+<img src='./images/img_112.png' alt='img_112' width='600'/>
 
-If you haven't slipstreamed drivers you'll need to visit your OEMs drivers and downloads page (likely on another computer as you'll have no drivers for your network adapters) and download each driver and save to USB.
+Windows is activated and the Product ID contains "OEM-899" meaning OEM SLP is used. The Product ID will differ for each Edition and OEM:
 
-Dell
-Lenovo
-HP
-System drivers will be system specific but you should try and stick to the following installation order. In some cases you will need to make sure the drivers extracts and then manually run the setup.exe from the extracted driver folder:
+<img src='./images/img_113.png' alt='img_113' width='600'/>
 
-Dell System (Notebook/Desktop) Software – Under System Utilities
-Chipset Drivers – Intel Chipset First – Under Chipset
-Chipset Drivers – Any other Intel – Under Chipset
-Card Reader – Realtek, Ricoh, O2 Micro – Under Chipset or Removable Storage
-Intel Matrix Storage Manager/Rapid Storage Technology – Under SATA Drives or CPU
-Video* – Intel, AMD or NVIDIA – Under Video
-Modem* – Conexant or Intel – Under Modem
-Network* – Ethernet – Under Network
-Touchpad – Touchpad – Under Input
-Audio – Sigmatel, Intel or Realtek – Under Audio
-TVTuners – Under Video
-Wireless Card* – Under Network
-Bluetooth* – Under Network
-Keyboard/Mouse Application – Under Applications
-Dell Quickset – Under Applications
-Webcam Driver – Under Input
-*indicates components which vary over region or can be customised when ordering the system.
+A check can also be made in the Device Manager:
 
-Ensure there are no errors in the Device Manager after installing the drivers.
+<img src='./images/img_114.png' alt='img_114' width='600'/>
 
-If using a SSD Cache Drive be sure to set it up after driver installation following the instructions.
+All the system drivers are installed and no errors are present:
+
+<img src='./images/img_115.png' alt='img_115' width='600'/>
+
 
 
 
