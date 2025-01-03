@@ -85,7 +85,7 @@ Then select Download:
 
 <img src='./images/img_009.png' alt='img_009' width='600'/>
 
-Although this ISO says Windows 7 Professional, it is a multi-edition ISO containing:
+Although this ISO says Windows 7 Professional, it is a multi-edition and multi-lingual ISO containing:
 
 * Windows 7 Starter* (2011)
 * Windows 7 Home Basic (2011)
@@ -133,17 +133,17 @@ If the computer has a Legacy BIOS or Windows 7 32 Bit is being used, the Partiti
 
 Select Start:
 
-<img src='./images/img_018.png' alt='img_018' width='600'/>
+<img src='./images/img_018.png' alt='img_018' width='400'/>
 
 Select OK:
 
-<img src='./images/img_019.png' alt='img_019' width='600'/>
+<img src='./images/img_019.png' alt='img_019' width='400'/>
 
 When finished, Rufus will say Ready, select Close:
 
-<img src='./images/img_020.png' alt='img_020' width='600'/>
+<img src='./images/img_020.png' alt='img_020' width='400'/>
 
-## Selecting Edition
+## Selecting Edition and OEM
 
 The default edition is Windows 7 Professional and Dell OEM SLP is applied by default. Skip this step if these defaults match your system.
 
