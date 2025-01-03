@@ -399,6 +399,14 @@ Open this file in notepad and delete all the contents between the unattend xml h
 
 <img src='./images/img_035.png' alt='img_035' width='600'/>
 
+The `oobe.xml` found `sources\$OEM$\$$\system32\oobe` applies Dell OEM branding to the default User Profile. This may be unwanted for a different OEM. Open this file in notepad and delete all the contents between the FirstExperience xml header.
+
+```html
+<?xml version="1.0" encoding="utf-8" ?>
+<FirstExperience>
+</FirstExperience>
+```
+
 </details>
 
 ## Windows 7 Security Patches + .Net Framework
