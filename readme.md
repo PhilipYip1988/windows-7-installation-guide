@@ -1,6 +1,6 @@
 # Windows 7 Installation Guide
 
-This guide covers installation of Windows 7 OEM on a device with an OEM license including downgrade rights to Windows 7 Professional. This guide is Dell-based but should equally apply to systems from major OEMs such as Lenovo and HP. This guide was originally on WordPress however I rewrote it on GitHub because I surprisingly got a lot of requests for this guide when I discontinued my WordPress subscription.
+This guide covers installation of Windows 7 OEM on a device with an OEM license including downgrade rights to Windows 7 Professional. This guide is Dell-based but should equally apply to systems from major OEMs such as Lenovo and HP. This guide was originally on WordPress however I rewrote it on GitHub because I surprisingly got a lot of requests for this guide when I discontinued my WordPress subscription and my site became private.
 
 ## End of Life
 
@@ -99,7 +99,9 @@ Although this ISO says Windows 7 Professional, it is a multi-edition and multi-l
 
 \*\* The Windows 7 Professional index of the install.wim was slipstreamed to include USB 3.0 drivers and NVMe drivers giving support for 6th Generation Intel (Skylake) Processors. Internet Explorer 11 was slipstreamed alongside a large number of security updates. 
 
-Minor changes can be made using a text editor to switch edition, OEM or channel once the Bootable USB has been created.
+Minor changes can be made using a text editor to switch edition e.g. from Professional to Home Premium, OEM e.g. from Dell to HP or channel e.g. OEM to Retail once the Bootable USB has been created. 
+
+Note that the Windows 7 Profession Edition was given a 2016 Media Refresh. The other editions are unmodified Windows 7 SP1 images from 2011... and lack Internet Explorer 11, the USB 3.0 or NVMe drivers. For best results these can be integrated alongside a driver pack using NTLite. For more details see [Integrating Updates + Drivers using NTLite](./slipstreaming/readme.md). On systems with USB 2.0 ports and Storage Controllers that use a SATA port, the outdated image can be used.
 
 ## Creating a Bootable USB with Rufus
 

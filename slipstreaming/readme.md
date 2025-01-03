@@ -23,9 +23,9 @@ Select Dell and OptiPlex 7040:
 
 <img src='./images/img_002.png' alt='img_002' width='600'/>
 
+Select Windows 7 64 Bit (or Windows 7 32 Bit) and select Download:
 
-
-
+<img src='./images/img_003.png' alt='img_003' width='600'/>
 
 ## Preparing OS Updates
 
