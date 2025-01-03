@@ -1,12 +1,14 @@
 # Windows 7 Installation Guide
 
+This guide covers installation of Windows 7 OEM on a device with an OEM license including downgrade rights to Windows 7 Professional. This guide is Dell-based but should equally apply to systems from major OEMs such as Lenovo and HP. This guide was originally on WordPress however I rewrote it on GitHub because I surprisingly got a lot of requests for this guide when I discontinued my WordPress subscription.
+
 ## End of Life
 
-Windows 7 Reached End of Life in April 2020 and should be deemed insecure.
+Windows 7 Reached End of Life 5 years ago in April 2020 and should be deemed insecure. **Use with caution.**
 
 ## Firmware Technologies
 
-Power up your Dell and press `F2` to enter the BIOS/UEFI Setup. Check with your device manufacturer for the correct function key combination to enter the BIOS/UEFI setup:
+Power up your Device and press `F2` (Dell Devices) to enter the BIOS/UEFI Setup. The function key combination may differ for other manufacturers. Check with your device manufacturer for the correct function key combination to enter the BIOS/UEFI setup:
 
 <img src='./images/img_001.png' alt='img_001' width='600'/>
 
@@ -99,7 +101,7 @@ Although this ISO says Windows 7 Professional, it is a multi-edition and multi-l
 
 ## Creating a Bootable USB with Rufus
 
-The final version of Rufus to support Windows 7 is version 3.22. Rufus can be downloaded from the official website [Rufus](https://rufus.ie/downloads/). Launch Rufus:
+The last version of Rufus to support Windows 7 is version 3.22. Rufus can be downloaded from the official website [Rufus](https://rufus.ie/downloads/). Launch Rufus:
 
 <img src='./images/img_010.png' alt='img_010' width='600'/>
 
@@ -362,7 +364,7 @@ Update this key in accordance to the OEM and the Edition:
 
 </details>
 
-Navigate to `sources\$OEM$\$$\system32\OEM`. The `ie.bat` file applies Dell OEM branding in Internet Explorer and in System Properties:
+Navigate to `sources\$OEM$\$$\system32\OEM`. The `ie.bat` file applies Dell OEM branding in Internet Explorer:
 
 <img src='./images/img_030.png' alt='img_030' width='600'/>
 
@@ -374,28 +376,89 @@ Delete the content under `:defaults`
 
 <img src='./images/img_032.png' alt='img_032' width='600'/>
 
-## Microsoft .NET Framework
+Navigate to `sources\$OEM$\$$\setup\scripts`. The `unattend.xml` applies Dell OEM branding in System Properties. 
 
-Many of the Intel system drivers require the Microsoft .NET 4.8.0 Framework in order for their respective installers to load. 
+Open this file in notepad and delete all the contents between the unattend xml header.
 
-<img src='./images/img_033.png' alt='img_033' width='600'/>
+<img src='./images/img_034.png' alt='img_034' width='600'/>
 
-The 4.7.2 (Offline Installer) and 4.8.0 Upgrade should be installed before any system drivers:
+```html
+<?xml version="1.0" encoding="utf-8" ?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend">
+</unattend>
+```
+
+<img src='./images/img_035.png' alt='img_035' width='600'/>
+
+## Windows 7 Security Patches + .Net Framework
+
+Many of the Intel system drivers require some Windows Updates to be installed in order for their respective installers to load:
+
+<img src='./images/img_036.png' alt='img_036' width='600'/>
+
+The following standalone updates should be installed from Microsoft before installing system drivers:
+
+**Select the "Windows 7 64 Bit" Package for Windows 7 64 Bit or and "Windows 7" package for Windows 7 32 Bit.**
+
+<img src='./images/img_037.png' alt='img_037' width='600'/>
+
+Convenience Rollup:
+
+* [Service Stack KB3020369](https://www.catalog.update.microsoft.com/Search.aspx?q=KB3020369)
+* [Convenience Rollup KB3125574](https://www.catalog.update.microsoft.com/Search.aspx?q=3125574)
+
+Note that a restart is required after installing these updates:
+
+<details>
+<summary>IE11</summary>
+IE11 is slipstreamed in the Pro Edition of the Dell Skylake ISO. For other editions, the following should be installed:
+
+IE11 Prerequisite Updates:
+
+* [KB2729094](https://www.catalog.update.microsoft.com/Search.aspx?q=2729094)
+* [KB2670838](https://www.catalog.update.microsoft.com/Search.aspx?q=2670838)
+* [KB2834140](https://www.catalog.update.microsoft.com/Search.aspx?q=2834140)
+* [KB3020369](https://www.catalog.update.microsoft.com/Search.aspx?q=3020369)
+
+IE11:
+
+* [IE11 64 Bit](https://www.microsoft.com/en-us/download/details.aspx?id=41628)
+* [IE11 32 Bit](https://www.microsoft.com/en-us/download/details.aspx?id=40907)
+
+A restart is required after installing these updates.
+
+</details>
+
+Service Stack Updates for January 2020 Rollup:
+
+* [KB4474419](https://www.catalog.update.microsoft.com/Search.aspx?q=4474419)
+* [KB4490628](https://www.catalog.update.microsoft.com/Search.aspx?q=4490628)
+* [KB4536952](https://www.catalog.update.microsoft.com/Search.aspx?q=4536952)
+
+Security Rollup:
+
+**Windows 7 Reached End of Life in January 2020 so this is the final Security Rollup.**
+
+* [Security Rollup KB4534310](https://www.catalog.update.microsoft.com/Search.aspx?q=2020-01%20Security%20Monthly%20Quality%20Rollup)
+
+A restart is required after installing these updates. 
+
+Microsoft .Net Framework: 
 
 * [Microsoft .NET 4.7.2 Framework (Offline Installer)](https://support.microsoft.com/en-gb/topic/microsoft-net-framework-4-7-2-offline-installer-for-windows-05a72734-2127-a15d-50cf-daf56d5faec2)
 * [Microsoft .NET 4.8.0 Framework (Offline Installer)](https://support.microsoft.com/en-gb/topic/microsoft-net-framework-4-8-offline-installer-for-windows-9d23f658-3b97-68ab-d013-aa3c3e7495e0)
 
 Create a new folder on the Bootable USB called `drivers`:
 
-<img src='./images/img_034.png' alt='img_034' width='600'/>
+<img src='./images/img_038.png' alt='img_038' width='600'/>
 
-Create a subfodler called `net framework`:
+Create a subfolder called `os updates`:
 
-<img src='./images/img_035.png' alt='img_035' width='600'/>
+<img src='./images/img_039.png' alt='img_039' width='600'/>
 
-Copy the two downloads to it:
+Copy the above downloads to it:
 
-<img src='./images/img_036.png' alt='img_036' width='600'/>
+<img src='./images/img_040.png' alt='img_040' width='600'/>
 
 ## Drivers and Downloads
 
@@ -407,19 +470,19 @@ The Device Drivers will need to be manually downloaded from the OEMs drivers and
 
 Select the system model:
 
-<img src='./images/img_037.png' alt='img_037' width='600'/>
+<img src='./images/img_041.png' alt='img_041' width='600'/>
 
 Windows 7 usually doesn't have any network drivers preinstalled so these tools cannot connect to the internet in any case. Select expand (if this does not show select Check for Updates and then cancel the prompt to install SupportAssist):
 
-<img src='./images/img_038.png' alt='img_038' width='600'/>
+<img src='./images/img_042.png' alt='img_042' width='600'/>
 
 Select Windows 7 64 Bit or Windows 7 32 Bit under Operating System:
 
-<img src='./images/img_039.png' alt='img_039' width='600'/>
+<img src='./images/img_043.png' alt='img_043' width='600'/>
 
 Under category select chipset
 
-<img src='./images/img_040.png' alt='img_040' width='600'/>
+<img src='./images/img_044.png' alt='img_044' width='600'/>
 
 Create the subfolders
 
@@ -430,46 +493,46 @@ chipset:
 * Intel Management Engine Interface
 * Realtek Memory Card Reader
 
-<img src='./images/img_041.png' alt='img_041' width='600'/>
+<img src='./images/img_045.png' alt='img_045' width='600'/>
 
-<img src='./images/img_042.png' alt='img_042' width='600'/>
+<img src='./images/img_046.png' alt='img_046' width='600'/>
 
 storage:
 
 * Intel Rapid Storage Technology
 
-<img src='./images/img_043.png' alt='img_043' width='600'/>
+<img src='./images/img_047.png' alt='img_047' width='600'/>
 
-<img src='./images/img_044.png' alt='img_044' width='600'/>
+<img src='./images/img_048.png' alt='img_048' width='600'/>
 
 audio:
 
 * Realtek Audio
 
-<img src='./images/img_045.png' alt='img_045' width='600'/>
+<img src='./images/img_049.png' alt='img_049' width='600'/>
 
-<img src='./images/img_046.png' alt='img_046' width='600'/>
+<img src='./images/img_050.png' alt='img_050' width='600'/>
 
 video:
 
 Dell systems typically have variations in the video card. Details about the video card is shown in the system information page in the BIOS Setup
 
-<img src='./images/img_047.png' alt='img_047' width='600'/>
+<img src='./images/img_051.png' alt='img_051' width='600'/>
 
 * Intel Video
 * NVIDIA or AMD Video\*
 
 \* When using switchable graphics, the Intel driver should be installed first before the NVIDIA or AMD video driver. This system only has Intel graphics. 
 
-<img src='./images/img_048.png' alt='img_048' width='600'/>
+<img src='./images/img_052.png' alt='img_052' width='600'/>
 
-<img src='./images/img_049.png' alt='img_049' width='600'/>
+<img src='./images/img_053.png' alt='img_053' width='600'/>
 
 network:
 
 Dell systems typically have variations in the wireless card. Details about the wireless card is shown in the system information page in the BIOS Setup
 
-<img src='./images/img_050.png' alt='img_050' width='600'/>
+<img src='./images/img_054.png' alt='img_054' width='600'/>
 
 **Windows 7 is at end of life and should be deemed insecure, use offline or apply caution when connected to the internet.**
 
@@ -477,9 +540,9 @@ Dell systems typically have variations in the wireless card. Details about the w
 * Wireless
 * Bluetooth
 
-<img src='./images/img_051.png' alt='img_051' width='600'/>
+<img src='./images/img_055.png' alt='img_055' width='600'/>
 
-<img src='./images/img_052.png' alt='img_052' width='600'/>
+<img src='./images/img_056.png' alt='img_056' width='600'/>
 
 applications:
 
@@ -491,49 +554,49 @@ This is not applicable for this desktop.
 
 The installation media is now ready:
 
-<img src='./images/img_053.png' alt='img_053' width='600'/>
+<img src='./images/img_057.png' alt='img_057' width='600'/>
 
 ## BIOS Setup
 
-Power up your Dell and press `F2` to enter the BIOS/UEFI Setup. Check with your device manufacturer for the correct function key combination to enter the BIOS/UEFI setup:
+Power up your Device and press `F2` (Dell Devices) to enter the BIOS/UEFI Setup. The function key combination may differ for other manufacturers. Check with your device manufacturer for the correct function key combination to enter the BIOS/UEFI setup:
 
-<img src='./images/img_054.png' alt='img_054' width='600'/>
+<img src='./images/img_058.png' alt='img_058' width='600'/>
 
 The System Information will display:
 
-<img src='./images/img_055.png' alt='img_055' width='600'/>
+<img src='./images/img_059.png' alt='img_059' width='600'/>
 
 Navigate to System Configuration and then to SATA Operation and change the setting to RAID:
 
-<img src='./images/img_056.png' alt='img_056' width='600'/>
+<img src='./images/img_060.png' alt='img_060' width='600'/>
 
 Navigate to Secure Boot then to Secure Boot Enable and change the setting to Disabled:
 
 **Windows 7 does not support Secure Boot and does not pass Secure Boot**.
 
-<img src='./images/img_057.png' alt='img_057' width='600'/>
+<img src='./images/img_061.png' alt='img_061' width='600'/>
 
 Select Yes:
 
-<img src='./images/img_058.png' alt='img_058' width='600'/>
+<img src='./images/img_062.png' alt='img_062' width='600'/>
 
 **Legacy Option ROMs must be enabled for Windows 7.**.
 
 Navigate to Advanced Boot Options and select Enable Legacy Option ROMS. Enable Attempt Legacy Boot should be DIsabled:
 
-<img src='./images/img_059.png' alt='img_059' width='600'/>
+<img src='./images/img_063.png' alt='img_063' width='600'/>
 
 Navigate to Boot Sequence:
 
-<img src='./images/img_060.png' alt='img_060' width='600'/>
+<img src='./images/img_064.png' alt='img_064' width='600'/>
 
 Uncheck the UEFI: USB and select Delete to delete old boot entries:
 
-<img src='./images/img_061.png' alt='img_061' width='600'/>
+<img src='./images/img_065.png' alt='img_065' width='600'/>
 
 Now only the Bootable USB Displays:
 
-<img src='./images/img_062.png' alt='img_062' width='600'/>
+<img src='./images/img_066.png' alt='img_066' width='600'/>
 
 In the maintainance tab, select data wipe:
 
@@ -541,53 +604,51 @@ In the maintainance tab, select data wipe:
 
 Select Wipe on next Boot:
 
-<img src='./images/img_063.png' alt='img_063' width='600'/>
-
-Select OK:
-
-<img src='./images/img_064.png' alt='img_064' width='600'/>
-
-Select No:
-
-<img src='./images/img_065.png' alt='img_065' width='600'/>
-
-Select Exit to exit the Setup:
-
-<img src='./images/img_066.png' alt='img_066' width='600'/>
-
-Select OK:
-
 <img src='./images/img_067.png' alt='img_067' width='600'/>
 
-The device will reboot:
+Select OK:
 
 <img src='./images/img_068.png' alt='img_068' width='600'/>
 
-Showing the Dell logo:
+Select No:
 
 <img src='./images/img_069.png' alt='img_069' width='600'/>
 
-The Data Wipe prompt will display select Continue:
+Select Exit to exit the Setup:
 
 <img src='./images/img_070.png' alt='img_070' width='600'/>
 
-Select Erase:
+Select OK:
 
 <img src='./images/img_071.png' alt='img_071' width='600'/>
+
+The device will reboot:
+
+<img src='./images/img_072.png' alt='img_072' width='600'/>
+
+Showing the Dell logo:
+
+<img src='./images/img_073.png' alt='img_073' width='600'/>
+
+The Data Wipe prompt will display select Continue:
+
+<img src='./images/img_074.png' alt='img_074' width='600'/>
+
+Select Erase:
+
+<img src='./images/img_075.png' alt='img_075' width='600'/>
 
 **Data wipe will take a couple of minutes for a SSD and several hours for a HDD.**
 
 Select OK:
 
-<img src='./images/img_072.png' alt='img_072' width='600'/>
+<img src='./images/img_076.png' alt='img_076' width='600'/>
 
 ## Booting from USB
 
 Insert the Bootable USB. Power up the Dell and press `F12`:
 
-
-
-<img src='./images/img_064.png' alt='img_064' width='600'/>
+<img src='./images/img_077.png' alt='img_077' width='600'/>
 
 
 
