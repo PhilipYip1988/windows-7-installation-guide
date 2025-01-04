@@ -20,14 +20,17 @@ Select Windows 7 64 Bit (or Windows 7 32 Bit) and select Download:
 
 Add/Remove Features.
 
-## VMware
+## Installing VMware Workstation
 
 Download the latest version of VMware Workstation from VMware:
 
 * [VMware Workstation](https://softwareupdate.vmware.com/cds/vmw-desktop/ws/)
 
 
+## Creating a Windows 7 VM
 
+
+## SLIC Passthrough and OEM SLP
 
 Add the following to your VMware configuration file:
 
@@ -43,5 +46,3 @@ Do not add the first line for Windows 7 32 Bit. For 64 Bit add the first line bu
 ```
 firmware = "bios"
 ```
-
-If it exists delete it. This will prevent you from booting to BIOS instead of EFI. Note you will not be able to Boot with EFI if your install.wim on your ISO is greater than 4 GB for instance if you have slipstreamed drivers and updates to the install.wim.
