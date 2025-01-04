@@ -1,10 +1,10 @@
 # Windows 7 Installation Guide
 
-This guide covers installation of Windows 7 OEM on a device with an OEM license including downgrade rights to Windows 7 Professional. This guide is Dell-based but should equally apply to systems from major OEMs such as Lenovo and HP. This guide was originally on WordPress however I rewrote it on GitHub because I surprisingly got a lot of requests for this guide when I discontinued my WordPress subscription and my site became private.
+This guide covers installation of Windows 7 OEM on a device with an OEM license including downgrade rights to Windows 7 Professional. This guide is Dell-based but should equally apply to systems from major OEMs such as Lenovo and HP. 
 
 ## End of Life
 
-Windows 7 Reached End of Life 5 years ago in April 2020 and should be deemed insecure. **Use with caution.**
+Windows 7 Reached End of Life 5 years ago in April 2020 and should be deemed insecure. **Use with caution, particularly when online.**
 
 ## Firmware Technologies
 
@@ -89,19 +89,17 @@ Then select Download:
 
 Although this ISO says Windows 7 Professional, it is a multi-edition and multi-lingual ISO containing:
 
-* Windows 7 Starter* (2011)
-* Windows 7 Home Basic (2011)
-* Windows 7 Home Premium (2011)
-* Windows 7 Professional (2016**)
-* Windows 7 Ultimate (2011)
+* Windows 7 Starter\* (2011\*\*\*)
+* Windows 7 Home Basic (2011\*\*\*)
+* Windows 7 Home Premium (2011\*\*\*)
+* Windows 7 Professional (2016\*\*)
+* Windows 7 Ultimate (2011\*\*\*)
 
 \* 32 Bit only.
 
 \*\* The Windows 7 Professional index of the install.wim was slipstreamed to include USB 3.0 drivers and NVMe drivers giving support for 6th Generation Intel (Skylake) Processors. Internet Explorer 11 was slipstreamed alongside a large number of security updates. 
 
-Minor changes can be made using a text editor to switch edition e.g. from Professional to Home Premium, OEM e.g. from Dell to HP or channel e.g. OEM to Retail once the Bootable USB has been created. 
-
-Note that the Windows 7 Profession Edition was given a 2016 Media Refresh. The other editions are unmodified Windows 7 SP1 images from 2011... and lack Internet Explorer 11, the USB 3.0 or NVMe drivers. For best results these can be integrated alongside a driver pack using NTLite. For more details see [Integrating Updates + Drivers using NTLite](./slipstreaming/readme.md). On systems with USB 2.0 ports and Storage Controllers that use a SATA port, the outdated image can be used.
+\*\*\* Minor changes can be made using a text editor to switch edition e.g. from Professional to Home Premium, OEM e.g. from Dell to HP or channel e.g. OEM to Retail once the Bootable USB has been created. However to install Windows 7 on outdated 2011 media a USB 2.0 needs to be used for the Bootable USB, keyboard and mouse and the storage controller needs to use a SATA connector. If the device only has USB 3.0 ports and a NVMe SSD, device drivers will need to be slipstreamed. For more details see [Integrating Updates + Driver Packages using NTLite](./slipstreaming/readme.md).
 
 ## Creating a Bootable USB with Rufus
 
@@ -151,7 +149,9 @@ When finished, Rufus will say Ready, select Close:
 
 ## Selecting Windows 7 Edition or OEM
 
-The default edition is Windows 7 Professional and Dell OEM SLP is applied by default. Skip this step if these defaults match your system.
+**The default edition is Windows 7 Professional and Dell OEM SLP is applied by default. Skip this step if these defaults match your system.**
+
+**If the Updates were integrated into the installation media with NTLite, this step can be has already been carried out and can be skipped.**
 
 <details>
 <summary>Changing Edition or OEM</summary>
@@ -411,7 +411,9 @@ The `oobe.xml` found `sources\$OEM$\$$\system32\oobe` applies Dell OEM branding 
 
 </details>
 
-## Windows 7 Security Patches + .Net Framework
+## Windows 7 Security Patches
+
+**If the Updates were integrated into the installation media with NTLite, this step can be has already been carried out and can be skipped.**
 
 Many of the Intel system drivers require some Windows Updates to be installed in order for their respective installers to load:
 
@@ -482,6 +484,8 @@ Copy the above downloads to it:
 <img src='./images/img_040.png' alt='img_040' width='600'/>
 
 ## Drivers and Downloads
+
+**If the Devices Driver Pack was integrated into the installation media with NTLite, this step has already been carried out and can be skipped.**
 
 The Device Drivers will need to be manually downloaded from the OEMs drivers and downloads page: 
 
@@ -667,7 +671,7 @@ Select OK:
 
 ## Booting from USB
 
-Insert the Bootable USB. Power up the Dell and press `F12`:
+Insert the Bootable USB. Power up the Device and press `F12`. The function key combination may differ for other manufacturers. Check with your device manufacturer for the correct function key combination to enter the BIOS/UEFI boot menu:
 
 <img src='./images/img_077.png' alt='img_077' width='600'/>
 
@@ -794,6 +798,8 @@ Optionally input a password:
 
 <img src='./images/img_106.png' alt='img_106' width='600'/>
 
+When OEM SLP is used, there will be no prompt for a Product Key. If OEM SLP has been removed so the installation media can be used with a Retail License, there will be a prompt for a Retail Product Key. Only input a Product Key at this stage if the Windows 7 License is Retail Full. Select Skip for a Retail Upgrade License. 
+
 The update options are redundant as Windows 7 has reached end of life:
 
 <img src='./images/img_107.png' alt='img_107' width='600'/>
@@ -826,6 +832,22 @@ Windows is activated and the Product ID contains "OEM-899" meaning OEM SLP is us
 
 <img src='./images/img_113.png' alt='img_113' width='600'/>
 
+For a Retail Product Key, there will be a prompt for Product Activation when the device is connected to the internet.
+
+A Retail Upgrade product key is rejected when it is input manually using the GUI. However it can be input via the command prompt using the command:
+
+```powershell
+slmgr /ipk xxxxx-xxxxx-xxxxx-xxxxx-xxxxx
+```
+
+Where `xxxxx-xxxxx-xxxxx-xxxxx-xxxxx` is the Retail Upgrade product key. Once this is input, activate Windows using the command:
+
+```powershell
+slmgr /ato
+```
+
+## Device Manager
+
 A check can also be made in the Device Manager:
 
 <img src='./images/img_114.png' alt='img_114' width='600'/>
@@ -833,8 +855,3 @@ A check can also be made in the Device Manager:
 All the system drivers are installed and no errors are present:
 
 <img src='./images/img_115.png' alt='img_115' width='600'/>
-
-
-
-
-

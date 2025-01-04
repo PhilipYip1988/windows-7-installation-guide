@@ -29,6 +29,126 @@ Select Windows 7 64 Bit (or Windows 7 32 Bit) and select Download:
 
 ## Preparing OS Updates
 
+<img src='./images/img_004.png' alt='img_004' width='600'/>
+<img src='./images/img_005.png' alt='img_005' width='600'/>
+<img src='./images/img_006.png' alt='img_006' width='600'/>
+<img src='./images/img_007.png' alt='img_007' width='600'/>
+<img src='./images/img_008.png' alt='img_008' width='600'/>
+<img src='./images/img_009.png' alt='img_009' width='600'/>
+<img src='./images/img_010.png' alt='img_010' width='600'/>
+<img src='./images/img_011.png' alt='img_011' width='600'/>
+<img src='./images/img_012.png' alt='img_012' width='600'/>
+<img src='./images/img_013.png' alt='img_013' width='600'/>
+<img src='./images/img_014.png' alt='img_014' width='600'/>
+<img src='./images/img_015.png' alt='img_015' width='600'/>
+<img src='./images/img_016.png' alt='img_016' width='600'/>
+<img src='./images/img_017.png' alt='img_017' width='600'/>
+<img src='./images/img_018.png' alt='img_018' width='600'/>
+<img src='./images/img_019.png' alt='img_019' width='600'/>
+<img src='./images/img_020.png' alt='img_020' width='600'/>
+<img src='./images/img_021.png' alt='img_021' width='600'/>
+<img src='./images/img_022.png' alt='img_022' width='600'/>
+<img src='./images/img_023.png' alt='img_023' width='600'/>
+<img src='./images/img_024.png' alt='img_024' width='600'/>
+<img src='./images/img_025.png' alt='img_025' width='600'/>
+<img src='./images/img_026.png' alt='img_026' width='600'/>
+<img src='./images/img_027.png' alt='img_027' width='600'/>
+<img src='./images/img_028.png' alt='img_028' width='600'/>
+<img src='./images/img_029.png' alt='img_029' width='600'/>
+<img src='./images/img_030.png' alt='img_030' width='600'/>
+<img src='./images/img_031.png' alt='img_031' width='600'/>
+<img src='./images/img_032.png' alt='img_032' width='600'/>
+<img src='./images/img_033.png' alt='img_033' width='600'/>
+<img src='./images/img_034.png' alt='img_034' width='600'/>
+<img src='./images/img_035.png' alt='img_035' width='600'/>
+<img src='./images/img_036.png' alt='img_036' width='600'/>
+<img src='./images/img_037.png' alt='img_037' width='600'/>
+<img src='./images/img_038.png' alt='img_038' width='600'/>
+<img src='./images/img_039.png' alt='img_039' width='600'/>
+<img src='./images/img_040.png' alt='img_040' width='600'/>
+<img src='./images/img_041.png' alt='img_041' width='600'/>
+<img src='./images/img_042.png' alt='img_042' width='600'/>
+<img src='./images/img_043.png' alt='img_043' width='600'/>
+<img src='./images/img_044.png' alt='img_044' width='600'/>
+<img src='./images/img_045.png' alt='img_045' width='600'/>
+<img src='./images/img_046.png' alt='img_046' width='600'/>
+<img src='./images/img_047.png' alt='img_047' width='600'/>
+<img src='./images/img_048.png' alt='img_048' width='600'/>
+<img src='./images/img_049.png' alt='img_049' width='600'/>
+<img src='./images/img_050.png' alt='img_050' width='600'/>
+<img src='./images/img_051.png' alt='img_051' width='600'/>
+<img src='./images/img_052.png' alt='img_052' width='600'/>
+<img src='./images/img_053.png' alt='img_053' width='600'/>
+<img src='./images/img_054.png' alt='img_054' width='600'/>
+<img src='./images/img_055.png' alt='img_055' width='600'/>
+<img src='./images/img_056.png' alt='img_056' width='600'/>
+<img src='./images/img_057.png' alt='img_057' width='600'/>
+<img src='./images/img_058.png' alt='img_058' width='600'/>
+<img src='./images/img_059.png' alt='img_059' width='600'/>
+<img src='./images/img_060.png' alt='img_060' width='600'/>
+<img src='./images/img_061.png' alt='img_061' width='600'/>
+<img src='./images/img_062.png' alt='img_062' width='600'/>
+<img src='./images/img_063.png' alt='img_063' width='600'/>
+<img src='./images/img_064.png' alt='img_064' width='600'/>
+<img src='./images/img_065.png' alt='img_065' width='600'/>
+<img src='./images/img_066.png' alt='img_066' width='600'/>
+<img src='./images/img_067.png' alt='img_067' width='600'/>
+<img src='./images/img_068.png' alt='img_068' width='600'/>
+<img src='./images/img_069.png' alt='img_069' width='600'/>
+<img src='./images/img_070.png' alt='img_070' width='600'/>
+<img src='./images/img_071.png' alt='img_071' width='600'/>
+<img src='./images/img_072.png' alt='img_072' width='600'/>
+<img src='./images/img_073.png' alt='img_073' width='600'/>
+<img src='./images/img_074.png' alt='img_074' width='600'/>
+<img src='./images/img_075.png' alt='img_075' width='600'/>
+<img src='./images/img_076.png' alt='img_076' width='600'/>
+<img src='./images/img_077.png' alt='img_077' width='600'/>
+<img src='./images/img_078.png' alt='img_078' width='600'/>
+<img src='./images/img_079.png' alt='img_079' width='600'/>
+<img src='./images/img_080.png' alt='img_080' width='600'/>
+<img src='./images/img_081.png' alt='img_081' width='600'/>
+<img src='./images/img_082.png' alt='img_082' width='600'/>
+<img src='./images/img_083.png' alt='img_083' width='600'/>
+<img src='./images/img_084.png' alt='img_084' width='600'/>
+<img src='./images/img_085.png' alt='img_085' width='600'/>
+<img src='./images/img_086.png' alt='img_086' width='600'/>
+<img src='./images/img_087.png' alt='img_087' width='600'/>
+<img src='./images/img_088.png' alt='img_088' width='600'/>
+<img src='./images/img_089.png' alt='img_089' width='600'/>
+<img src='./images/img_090.png' alt='img_090' width='600'/>
+<img src='./images/img_091.png' alt='img_091' width='600'/>
+<img src='./images/img_092.png' alt='img_092' width='600'/>
+<img src='./images/img_093.png' alt='img_093' width='600'/>
+<img src='./images/img_094.png' alt='img_094' width='600'/>
+<img src='./images/img_095.png' alt='img_095' width='600'/>
+<img src='./images/img_096.png' alt='img_096' width='600'/>
+<img src='./images/img_097.png' alt='img_097' width='600'/>
+<img src='./images/img_098.png' alt='img_098' width='600'/>
+<img src='./images/img_099.png' alt='img_099' width='600'/>
+<img src='./images/img_100.png' alt='img_100' width='600'/>
+<img src='./images/img_101.png' alt='img_101' width='600'/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Download the following and save the following updates in a `os updates` folder:
 
 * [KB2670838](https://www.catalog.update.microsoft.com/Search.aspx?q=KB2670838)
