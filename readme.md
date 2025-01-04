@@ -97,7 +97,7 @@ Although this ISO says Windows 7 Professional, it is a multi-edition and multi-l
 
 \* 32 Bit only.
 
-\*\* The Windows 7 Professional index of the install.wim was slipstreamed to include USB 3.0 drivers and NVMe drivers giving support for 6th Generation Intel (Skylake) Processors. Internet Explorer 11 was slipstreamed alongside a large number of security updates. 
+\*\* The Windows 7 Professional index of the install.wim was slipstreamed to include USB 3.0 drivers and NVMe drivers giving support for 6th Generation Intel (Skylake) Processors. Internet Explorer 11 was slipstreamed alongside a large number of security updates. This only gives basic out of the box support and lacks system specific drivers such as Network Controllers. A Driver Pack can be slipstreamed. For more details see [Integrating Updates + Driver Packages using NTLite](./slipstreaming/readme.md).
 
 \*\*\* Minor changes can be made using a text editor to switch edition e.g. from Professional to Home Premium, OEM e.g. from Dell to HP or channel e.g. OEM to Retail once the Bootable USB has been created. However to install Windows 7 on outdated 2011 media a USB 2.0 needs to be used for the Bootable USB, keyboard and mouse and the storage controller needs to use a SATA connector. If the device only has USB 3.0 ports and a NVMe SSD, device drivers will need to be slipstreamed. For more details see [Integrating Updates + Driver Packages using NTLite](./slipstreaming/readme.md).
 
