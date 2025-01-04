@@ -87,7 +87,7 @@ The extracted contents should look like:
 
 Download the Dell Driver Pack or Lenovo Driver Pack from the following link:
 
-* [Dell Family Drive Packs](https://www.dell.com/support/kbdoc/en-uk/000181936/dell-family-driver-packs-for-windows-7?msockid=3309923401c763c13d6b81e8007c62cb)
+* [Dell Family Driver Packs](https://www.dell.com/support/kbdoc/en-uk/000181936/dell-family-driver-packs-for-windows-7?msockid=3309923401c763c13d6b81e8007c62cb)
 * [Lenovo System Center Configuration Manager](https://support.lenovo.com/gb/en/solutions/ht074984-microsoft-system-center-configuration-manager-sccm-and-microsoft-deployment-toolkit-mdt-package-index)
 
 Extract these `.zip` files using Windows explorer. If the file is a `.exe`, launch the `.exe` and follow the instructions to extract. If the file is a `.cab` file, use 7zip to extract it.
