@@ -1,3 +1,4 @@
+# Windows 7 VM
 
 ## Download the Windows ISO Download Tool:
 
@@ -28,6 +29,12 @@ sudo mkdir -pm755 /etc/apt/keyrings
 ```
 
 Note that this is a system wide directory found under `/etc/apt`. Because this is a system wide directory `sudo` is required to run the command make directory `mkdir`. `-p` is an instruction to create the parent directories if required. `-m755` sets permissions `7` (read, write, and execute for the duper user), `5` (read and execute for the group of the user), `5` (read and execute for others).
+
+Change the directory to Downloads:
+
+```bash
+cd ~/Downloads
+```
 
 The wine repository key can be added to this keyring:
 
@@ -156,7 +163,7 @@ chmod +x
 This command changes the permissions of a file to execution. Drag the bundle file into the terminal and run the command:
 
 ```bash
-chmod +x '/home/philip/Downloads/VMware-Workstation-17.5.1-23298084.x86_64.bundle/VMware-Workstation-17.5.1-23298084.x86_64.bundle' 
+chmod +x '/home/philip/Downloads/VMware-Workstation-17.6.2-24409262.x86_64.bundle/VMware-Workstation-17.6.2-24409262.x86_64.bundle' 
 ```
 
 Now that the file is executable it can be run as a super using. Input the following command with a space (but don't run this command):
@@ -168,15 +175,64 @@ sudo
 Drag the bundle file into the terminal and run the command:
 
 ```bash
-sudo '/home/philip/Downloads/VMware-Workstation-17.5.1-23298084.x86_64.bundle/VMware-Workstation-17.5.1-23298084.x86_64.bundle' 
+sudo '/home/philip/Downloads/VMware-Workstation-17.6.2-24409262.x86_64.bundle/VMware-Workstation-17.6.2-24409262.x86_64.bundle'  
 ```
 
-## Disable Secure Boot
+## Configuring Secure Boot
 
+Secure Boot will block the Virtual Monitor Kernel Module and Virtual Network Adaptor Module.
 
+A Machine Owner Key (MOK) must be created which signs these modules.
 
+Generate a new Machine Owner Key:
 
+```bash
+openssl req -new -x509 -newkey rsa:2048 -keyout VMWARE17.priv -outform DER -out VMWARE17.der -nodes -days 36500 -subj "/CN=VMWARE/"
+```
 
+Sign the kernel module vmmon:
+
+```bash
+sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./VMWARE17.priv ./VMWARE17.der $(modinfo -n vmmon)
+```
+
+Sign the kernel module vmnet:
+
+```bash
+sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./VMWARE17.priv ./VMWARE17.der $(modinfo -n vmnet)
+```
+
+Importing the MOK with MOK management system:
+
+```bash
+sudo mokutil --import VMWARE17.der
+```
+
+In the terminal create a MOK password for example:
+
+```
+vmware1234
+```
+
+Confirm the password:
+
+```
+vmware1234
+```
+
+Input:
+
+```bash
+sudo reboot
+```
+
+In the BIOS Setup, select Enrol MOK and supply the password above:
+
+```
+vmware1234
+```
+
+This section may need to be repeated after a significant update.
 
 ## SLIC Passthrough and OEM SLP
 
@@ -192,7 +248,7 @@ Then:
 dir
 ```
 
-If a SLIC is present it can be passed through to the host PC. Add the following to your VMware configuration file:
+If a SLIC tab is present it can be passed through to the host PC. Add the following to your VMware configuration file:
 
 ```
 acpi.passthru.slic = "TRUE"
@@ -200,154 +256,9 @@ acpi.passthru.slicvendor = "TRUE"
 SMBIOS.reflecthost = "TRUE"
 ```
 
+Note the VM will fail to launch if a SLIC is not present.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## Install VMware Host Modules 
-
-
-The following GitHub repository contains modded VMware Host Modules which are required for the Virtual Monitor Kernel Module and Virtual Network Adaptor Module to load properly. Download the latest version:
-
-* [GitHub: VMware host modules](https://github.com/mkubecek/vmware-host-modules)
-
-To the left hand side select releases:
-
-
-
-Download the latest release as a `.zip` file:
-
-
-
-VMWare is installed however the Virtual Monitor Kernel Module and Virtual Network Kernel Module are not loaded correctly. When the VM is launched the following error message displays:
-
->>> Could not open /dev/vmmon: No such file or directory.
->>> Please make sure that the kernel module `vmmon' is loaded.
-
-
-Open the extracted folder `vmware-host-modules` in the terminal. Input:
-
-```bash
-tar -cf vmmon.tar vmmon-only
-```
-
-```bash
-tar -cf vmnet.tar vmnet-only
-```
-
-Copy these to the location `/usr/lib/vmware/modules/source`:
-
-```bash
-sudo cp -v vmmon.tar vmnet.tar /usr/lib/vmware/modules/source
-```
-
-Install the modules:
-
-```bash
-sudo vmware-modconfig --console --install-all
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## MOK Management (Not Working)
-
-In order for these kernel modules to be loaded at startup, a Machine Owner Key (MOK) is required.
-Generate a new Machine Owner Key:
-
-```bash
-openssl req -new -x509 -newkey rsa:2048 -keyout VMWARE1751.priv -outform DER -out VMWARE1751.der -nodes -days 36500 -subj "/CN=VMWARE/"
-```
-
-Sign the kernel module vmmon:
-
-```bash
-sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./VMWARE1751.priv ./VMWARE1751.der $(modinfo -n vmmon)
-```
-
-Sign the kernel module vmnet:
-
-```bash
-sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 ./VMWARE1751.priv ./VMWARE1751.der $(modinfo -n vmnet)
-```
-
-Importing the MOK with MOK management system:
-
-```bash
-sudo mokutil --import VMWARE1751.der
-```
-
-In the terminal create a MOK password for example:
-
-```
-vmware1751
-```
-
-Confirm the password:
-
-```
-vmware1751
-```
-
-Input:
-
-```bash
-sudo reboot
-```
-
-
-
-
-
-
-
-
-
-
-
-
-Uninstall
+## Uninstall VMware Workstation
 
 ```bash
 cd /usr/bin
