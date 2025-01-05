@@ -128,12 +128,12 @@ To launch it using wine use:
 wine start Windows-ISO-Downloader.exe
 ```
 
-## Installing Build Essential
+## Installing vmWARE pREQUISITES
 
-Install the `build-essential` package:
+Install the following packages:
 
 ```bash
-sudo apt install build-essential
+sudo apt install gcc-12 libgcc-12-dev build-essential
 ```
 
 ## Downloading VMware Workstation
