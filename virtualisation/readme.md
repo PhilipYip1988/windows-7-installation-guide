@@ -26,16 +26,26 @@ Download the latest version of VMware Workstation from VMware:
 
 * [VMware Workstation](https://softwareupdate.vmware.com/cds/vmw-desktop/ws/)
 
-
 ## Creating a Windows 7 VM
 
 
 ## SLIC Passthrough and OEM SLP
 
-Add the following to your VMware configuration file:
+To check if the host PC has a SLIC input:
+
+```bash
+cd /sys/firmware/acpi/tables/
+```
+
+Then:
+
+```bash
+dir
+```
+
+If a SLIC is present it can be passed through to the host PC. Add the following to your VMware configuration file:
 
 ```
-firmware = "efi"
 acpi.passthru.slic = "TRUE"
 acpi.passthru.slicvendor = "TRUE"
 SMBIOS.reflecthost = "TRUE"
