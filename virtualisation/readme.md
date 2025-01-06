@@ -50,9 +50,3 @@ acpi.passthru.slic = "TRUE"
 acpi.passthru.slicvendor = "TRUE"
 SMBIOS.reflecthost = "TRUE"
 ```
-
-Do not add the first line for Windows 7 32 Bit. For 64 Bit add the first line but check for the line:
-
-```
-firmware = "bios"
-```
